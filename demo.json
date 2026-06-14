@@ -1,0 +1,1191 @@
+{
+ "real_metrics": {
+  "overall_h1": 84.7,
+  "overall_mrr": 0.884,
+  "physical_h1": 87.9,
+  "chemical_h1": 99.0,
+  "biological_h1": 65.8,
+  "baseline_freq": 0.557,
+  "baseline_distmult": 0.588
+ },
+ "kg": {
+  "nodes": 8670,
+  "edges": 32939,
+  "relations": 22
+ },
+ "pools": {
+  "physical": [
+   "aggregation",
+   "particle formation",
+   "turbidity",
+   "viscosity"
+  ],
+  "chemical": [
+   "charge variants",
+   "deamidation",
+   "fragmentation",
+   "glycosylation",
+   "oxidation"
+  ],
+  "biological": [
+   "Fc function (ADCC/CDC)",
+   "binding activity",
+   "cell-based potency",
+   "conformational stability",
+   "microbial contamination",
+   "thermal stability"
+  ]
+ },
+ "demo_accuracy": {
+  "correct": 8,
+  "total": 13
+ },
+ "targets": [
+  {
+   "target": "binding activity",
+   "subcat": "biological",
+   "context": [
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "decreases",
+     "papers": 38
+    },
+    {
+     "node": "higher-order structure",
+     "cat": "structure",
+     "rel": "modifies",
+     "papers": 15
+    },
+    {
+     "node": "glycosylation",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 14
+    },
+    {
+     "node": "conformational change",
+     "cat": "structure",
+     "rel": "modifies",
+     "papers": 13
+    },
+    {
+     "node": "glycosylation pattern",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 12
+    }
+   ],
+   "candidates": [
+    {
+     "node": "binding activity",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "conformational stability",
+     "score": 0.604,
+     "correct": false
+    },
+    {
+     "node": "thermal stability",
+     "score": 0.521,
+     "correct": false
+    },
+    {
+     "node": "microbial contamination",
+     "score": 0.162,
+     "correct": false
+    },
+    {
+     "node": "cell-based potency",
+     "score": 0.0,
+     "correct": false
+    },
+    {
+     "node": "Fc function (ADCC/CDC)",
+     "score": 0.0,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "conformational stability",
+   "subcat": "biological",
+   "context": [
+    {
+     "node": "disulfide bond",
+     "cat": "structure",
+     "rel": "stabilizes",
+     "papers": 13
+    },
+    {
+     "node": "ph",
+     "cat": "formulation",
+     "rel": "stabilizes",
+     "papers": 11
+    },
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "destabilizes",
+     "papers": 8
+    },
+    {
+     "node": "excipients",
+     "cat": "formulation",
+     "rel": "modifies",
+     "papers": 7
+    },
+    {
+     "node": "n-glycosylation",
+     "cat": "sequence",
+     "rel": "stabilizes",
+     "papers": 5
+    }
+   ],
+   "candidates": [
+    {
+     "node": "binding activity",
+     "score": 1.0,
+     "correct": false
+    },
+    {
+     "node": "conformational stability",
+     "score": 0.75,
+     "correct": true
+    },
+    {
+     "node": "thermal stability",
+     "score": 0.608,
+     "correct": false
+    },
+    {
+     "node": "microbial contamination",
+     "score": 0.134,
+     "correct": false
+    },
+    {
+     "node": "cell-based potency",
+     "score": 0.0,
+     "correct": false
+    },
+    {
+     "node": "Fc function (ADCC/CDC)",
+     "score": 0.0,
+     "correct": false
+    }
+   ],
+   "rank": 2
+  },
+  {
+   "target": "microbial contamination",
+   "subcat": "biological",
+   "context": [
+    {
+     "node": "buffer composition",
+     "cat": "formulation",
+     "rel": "inhibits",
+     "papers": 2
+    },
+    {
+     "node": "endotoxin associated with the antibody",
+     "cat": "structure",
+     "rel": "prevents",
+     "papers": 1
+    },
+    {
+     "node": "dissociation of endotoxin from the protein surface",
+     "cat": "structure",
+     "rel": "decreases",
+     "papers": 1
+    },
+    {
+     "node": "subtle variations in production methods",
+     "cat": "formulation",
+     "rel": "modifies",
+     "papers": 1
+    },
+    {
+     "node": "arginine",
+     "cat": "formulation",
+     "rel": "inhibits",
+     "papers": 1
+    }
+   ],
+   "candidates": [
+    {
+     "node": "conformational stability",
+     "score": 1.0,
+     "correct": false
+    },
+    {
+     "node": "binding activity",
+     "score": 0.828,
+     "correct": false
+    },
+    {
+     "node": "thermal stability",
+     "score": 0.695,
+     "correct": false
+    },
+    {
+     "node": "microbial contamination",
+     "score": 0.041,
+     "correct": true
+    },
+    {
+     "node": "cell-based potency",
+     "score": 0.0,
+     "correct": false
+    },
+    {
+     "node": "Fc function (ADCC/CDC)",
+     "score": 0.0,
+     "correct": false
+    }
+   ],
+   "rank": 4
+  },
+  {
+   "target": "thermal stability",
+   "subcat": "biological",
+   "context": [
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "stabilizes",
+     "papers": 7
+    },
+    {
+     "node": "concentration",
+     "cat": "formulation",
+     "rel": "stabilizes",
+     "papers": 4
+    },
+    {
+     "node": "disulfide bond",
+     "cat": "structure",
+     "rel": "stabilizes",
+     "papers": 3
+    },
+    {
+     "node": "ph",
+     "cat": "formulation",
+     "rel": "modifies",
+     "papers": 3
+    },
+    {
+     "node": "n-glycosylation",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 2
+    }
+   ],
+   "candidates": [
+    {
+     "node": "binding activity",
+     "score": 1.0,
+     "correct": false
+    },
+    {
+     "node": "conformational stability",
+     "score": 0.679,
+     "correct": false
+    },
+    {
+     "node": "thermal stability",
+     "score": 0.584,
+     "correct": true
+    },
+    {
+     "node": "microbial contamination",
+     "score": 0.122,
+     "correct": false
+    },
+    {
+     "node": "cell-based potency",
+     "score": 0.0,
+     "correct": false
+    },
+    {
+     "node": "Fc function (ADCC/CDC)",
+     "score": 0.0,
+     "correct": false
+    }
+   ],
+   "rank": 3
+  },
+  {
+   "target": "charge variants",
+   "subcat": "chemical",
+   "context": [
+    {
+     "node": "charge variants",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 17
+    },
+    {
+     "node": "post-translational modifications",
+     "cat": "sequence",
+     "rel": "induces",
+     "papers": 13
+    },
+    {
+     "node": "fragmentation",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 7
+    },
+    {
+     "node": "ph-based cation exchange separation method",
+     "cat": "formulation",
+     "rel": "modifies",
+     "papers": 6
+    },
+    {
+     "node": "glycosylation",
+     "cat": "sequence",
+     "rel": "induces",
+     "papers": 5
+    }
+   ],
+   "candidates": [
+    {
+     "node": "glycosylation",
+     "score": 1.0,
+     "correct": false
+    },
+    {
+     "node": "fragmentation",
+     "score": 0.884,
+     "correct": false
+    },
+    {
+     "node": "charge variants",
+     "score": 0.874,
+     "correct": true
+    },
+    {
+     "node": "deamidation",
+     "score": 0.541,
+     "correct": false
+    },
+    {
+     "node": "oxidation",
+     "score": 0.346,
+     "correct": false
+    }
+   ],
+   "rank": 3
+  },
+  {
+   "target": "deamidation",
+   "subcat": "chemical",
+   "context": [
+    {
+     "node": "deamidation",
+     "cat": "stress",
+     "rel": "deamidates",
+     "papers": 7
+    },
+    {
+     "node": "light exposure",
+     "cat": "stress",
+     "rel": "deamidates",
+     "papers": 4
+    },
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 3
+    },
+    {
+     "node": "low ph",
+     "cat": "formulation",
+     "rel": "deamidates",
+     "papers": 3
+    },
+    {
+     "node": "ph",
+     "cat": "formulation",
+     "rel": "promotes",
+     "papers": 3
+    }
+   ],
+   "candidates": [
+    {
+     "node": "deamidation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "glycosylation",
+     "score": 0.805,
+     "correct": false
+    },
+    {
+     "node": "oxidation",
+     "score": 0.701,
+     "correct": false
+    },
+    {
+     "node": "charge variants",
+     "score": 0.628,
+     "correct": false
+    },
+    {
+     "node": "fragmentation",
+     "score": 0.597,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "fragmentation",
+   "subcat": "chemical",
+   "context": [
+    {
+     "node": "disulfide bond",
+     "cat": "structure",
+     "rel": "promotes",
+     "papers": 25
+    },
+    {
+     "node": "fragmentation",
+     "cat": "sequence",
+     "rel": "fragments",
+     "papers": 22
+    },
+    {
+     "node": "elevated temperature",
+     "cat": "stress",
+     "rel": "increases",
+     "papers": 16
+    },
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 14
+    },
+    {
+     "node": "storage temperature",
+     "cat": "stress",
+     "rel": "increases",
+     "papers": 10
+    }
+   ],
+   "candidates": [
+    {
+     "node": "fragmentation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "glycosylation",
+     "score": 0.647,
+     "correct": false
+    },
+    {
+     "node": "deamidation",
+     "score": 0.537,
+     "correct": false
+    },
+    {
+     "node": "oxidation",
+     "score": 0.425,
+     "correct": false
+    },
+    {
+     "node": "charge variants",
+     "score": 0.384,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "glycosylation",
+   "subcat": "chemical",
+   "context": [
+    {
+     "node": "glycosylation",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 18
+    },
+    {
+     "node": "n-glycosylation",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 4
+    },
+    {
+     "node": "amino acid sequence",
+     "cat": "sequence",
+     "rel": "modifies",
+     "papers": 3
+    },
+    {
+     "node": "media supplements",
+     "cat": "formulation",
+     "rel": "stabilizes",
+     "papers": 2
+    },
+    {
+     "node": "glycoengineering",
+     "cat": "formulation",
+     "rel": "modifies",
+     "papers": 2
+    }
+   ],
+   "candidates": [
+    {
+     "node": "glycosylation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "deamidation",
+     "score": 0.317,
+     "correct": false
+    },
+    {
+     "node": "charge variants",
+     "score": 0.306,
+     "correct": false
+    },
+    {
+     "node": "fragmentation",
+     "score": 0.25,
+     "correct": false
+    },
+    {
+     "node": "oxidation",
+     "score": 0.246,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "oxidation",
+   "subcat": "chemical",
+   "context": [
+    {
+     "node": "oxidation",
+     "cat": "stress",
+     "rel": "oxidizes",
+     "papers": 17
+    },
+    {
+     "node": "oxidative stress",
+     "cat": "stress",
+     "rel": "oxidizes",
+     "papers": 15
+    },
+    {
+     "node": "methionine",
+     "cat": "formulation",
+     "rel": "inhibits",
+     "papers": 10
+    },
+    {
+     "node": "light exposure",
+     "cat": "stress",
+     "rel": "induces",
+     "papers": 7
+    },
+    {
+     "node": "metal-catalyzed oxidation",
+     "cat": "stress",
+     "rel": "induces",
+     "papers": 5
+    }
+   ],
+   "candidates": [
+    {
+     "node": "oxidation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "fragmentation",
+     "score": 0.243,
+     "correct": false
+    },
+    {
+     "node": "deamidation",
+     "score": 0.226,
+     "correct": false
+    },
+    {
+     "node": "charge variants",
+     "score": 0.212,
+     "correct": false
+    },
+    {
+     "node": "glycosylation",
+     "score": 0.171,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "aggregation",
+   "subcat": "physical",
+   "context": [
+    {
+     "node": "thermal stress",
+     "cat": "stress",
+     "rel": "promotes",
+     "papers": 28
+    },
+    {
+     "node": "excipients",
+     "cat": "formulation",
+     "rel": "inhibits",
+     "papers": 26
+    },
+    {
+     "node": "self-association",
+     "cat": "structure",
+     "rel": "promotes",
+     "papers": 24
+    },
+    {
+     "node": "low ph",
+     "cat": "stress",
+     "rel": "promotes",
+     "papers": 22
+    },
+    {
+     "node": "elevated temperature",
+     "cat": "stress",
+     "rel": "promotes",
+     "papers": 21
+    }
+   ],
+   "candidates": [
+    {
+     "node": "aggregation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "viscosity",
+     "score": 0.818,
+     "correct": false
+    },
+    {
+     "node": "particle formation",
+     "score": 0.628,
+     "correct": false
+    },
+    {
+     "node": "turbidity",
+     "score": 0.12,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "particle formation",
+   "subcat": "physical",
+   "context": [
+    {
+     "node": "polysorbate degradation",
+     "cat": "formulation",
+     "rel": "promotes",
+     "papers": 10
+    },
+    {
+     "node": "agitation stress",
+     "cat": "stress",
+     "rel": "promotes",
+     "papers": 9
+    },
+    {
+     "node": "surfactant",
+     "cat": "formulation",
+     "rel": "inhibits",
+     "papers": 9
+    },
+    {
+     "node": "air-liquid interface",
+     "cat": "stress",
+     "rel": "promotes",
+     "papers": 9
+    },
+    {
+     "node": "shear stress",
+     "cat": "stress",
+     "rel": "induces",
+     "papers": 7
+    }
+   ],
+   "candidates": [
+    {
+     "node": "particle formation",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "aggregation",
+     "score": 0.604,
+     "correct": false
+    },
+    {
+     "node": "viscosity",
+     "score": 0.343,
+     "correct": false
+    },
+    {
+     "node": "turbidity",
+     "score": 0.118,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  },
+  {
+   "target": "turbidity",
+   "subcat": "physical",
+   "context": [
+    {
+     "node": "concentration",
+     "cat": "formulation",
+     "rel": "prevents",
+     "papers": 2
+    },
+    {
+     "node": "excipients",
+     "cat": "formulation",
+     "rel": "decreases",
+     "papers": 2
+    },
+    {
+     "node": "freezing rate",
+     "cat": "stress",
+     "rel": "modifies",
+     "papers": 1
+    },
+    {
+     "node": "agitation",
+     "cat": "stress",
+     "rel": "increases",
+     "papers": 1
+    },
+    {
+     "node": "mode of generation (chemical denaturation vs agitation)",
+     "cat": "stress",
+     "rel": "correlates",
+     "papers": 1
+    }
+   ],
+   "candidates": [
+    {
+     "node": "aggregation",
+     "score": 1.0,
+     "correct": false
+    },
+    {
+     "node": "particle formation",
+     "score": 0.698,
+     "correct": false
+    },
+    {
+     "node": "viscosity",
+     "score": 0.658,
+     "correct": false
+    },
+    {
+     "node": "turbidity",
+     "score": 0.125,
+     "correct": true
+    }
+   ],
+   "rank": 4
+  },
+  {
+   "target": "viscosity",
+   "subcat": "physical",
+   "context": [
+    {
+     "node": "self-association",
+     "cat": "structure",
+     "rel": "increases",
+     "papers": 23
+    },
+    {
+     "node": "high concentration",
+     "cat": "formulation",
+     "rel": "increases",
+     "papers": 21
+    },
+    {
+     "node": "excipients",
+     "cat": "formulation",
+     "rel": "decreases",
+     "papers": 17
+    },
+    {
+     "node": "protein-protein interactions",
+     "cat": "structure",
+     "rel": "increases",
+     "papers": 17
+    },
+    {
+     "node": "concentration",
+     "cat": "formulation",
+     "rel": "increases",
+     "papers": 14
+    }
+   ],
+   "candidates": [
+    {
+     "node": "viscosity",
+     "score": 1.0,
+     "correct": true
+    },
+    {
+     "node": "aggregation",
+     "score": 0.796,
+     "correct": false
+    },
+    {
+     "node": "particle formation",
+     "score": 0.596,
+     "correct": false
+    },
+    {
+     "node": "turbidity",
+     "score": 0.122,
+     "correct": false
+    }
+   ],
+   "rank": 1
+  }
+ ],
+ "hypotheses": [
+  {
+   "cause": "storage conditions",
+   "cause_cat": "stress",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.367,
+   "mediators": [
+    "aggregation",
+    "biological activity",
+    "higher-order structure"
+   ],
+   "n_med": 24
+  },
+  {
+   "cause": "electrostatic repulsion",
+   "cause_cat": "structure",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.346,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "binding affinity"
+   ],
+   "n_med": 10
+  },
+  {
+   "cause": "freeze-thaw stress",
+   "cause_cat": "quality_outcome",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.319,
+   "mediators": [
+    "aggregation",
+    "fragmentation",
+    "particle formation"
+   ],
+   "n_med": 6
+  },
+  {
+   "cause": "hydrophobic interaction",
+   "cause_cat": "formulation",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.305,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "binding affinity"
+   ],
+   "n_med": 18
+  },
+  {
+   "cause": "trehalose",
+   "cause_cat": "formulation",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.295,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 18
+  },
+  {
+   "cause": "freeze-thaw",
+   "cause_cat": "stress",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.294,
+   "mediators": [
+    "aggregation",
+    "immunogenicity",
+    "binding activity"
+   ],
+   "n_med": 10
+  },
+  {
+   "cause": "storage conditions",
+   "cause_cat": "stress",
+   "effect": "binding activity",
+   "subcat": "biological",
+   "score": 0.286,
+   "mediators": [
+    "aggregation",
+    "biological activity",
+    "higher-order structure"
+   ],
+   "n_med": 29
+  },
+  {
+   "cause": "shear stress",
+   "cause_cat": "formulation",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.286,
+   "mediators": [
+    "aggregation",
+    "biological activity",
+    "pharmacokinetics"
+   ],
+   "n_med": 21
+  },
+  {
+   "cause": "agitation",
+   "cause_cat": "stress",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.283,
+   "mediators": [
+    "aggregation",
+    "higher-order structure",
+    "fragmentation"
+   ],
+   "n_med": 14
+  },
+  {
+   "cause": "buffer composition",
+   "cause_cat": "formulation",
+   "effect": "particle formation",
+   "subcat": "physical",
+   "score": 0.282,
+   "mediators": [
+    "aggregation",
+    "immunogenicity",
+    "biological activity"
+   ],
+   "n_med": 28
+  },
+  {
+   "cause": "buffer composition",
+   "cause_cat": "formulation",
+   "effect": "deamidation",
+   "subcat": "chemical",
+   "score": 0.276,
+   "mediators": [
+    "aggregation",
+    "immunogenicity",
+    "binding activity"
+   ],
+   "n_med": 20
+  },
+  {
+   "cause": "storage conditions",
+   "cause_cat": "stress",
+   "effect": "thermal stability",
+   "subcat": "biological",
+   "score": 0.274,
+   "mediators": [
+    "aggregation",
+    "higher-order structure",
+    "binding affinity"
+   ],
+   "n_med": 15
+  },
+  {
+   "cause": "thermal denaturation",
+   "cause_cat": "stability",
+   "effect": "thermal stability",
+   "subcat": "biological",
+   "score": 0.272,
+   "mediators": [
+    "aggregation",
+    "higher-order structure",
+    "disulfide bond"
+   ],
+   "n_med": 9
+  },
+  {
+   "cause": "storage temperature",
+   "cause_cat": "stress",
+   "effect": "particle formation",
+   "subcat": "physical",
+   "score": 0.269,
+   "mediators": [
+    "aggregation",
+    "biological activity",
+    "higher-order structure"
+   ],
+   "n_med": 27
+  },
+  {
+   "cause": "freeze-thaw cycles",
+   "cause_cat": "stress",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.268,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 11
+  },
+  {
+   "cause": "low ph",
+   "cause_cat": "formulation",
+   "effect": "oxidation",
+   "subcat": "chemical",
+   "score": 0.261,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 31
+  },
+  {
+   "cause": "storage conditions",
+   "cause_cat": "stress",
+   "effect": "deamidation",
+   "subcat": "chemical",
+   "score": 0.259,
+   "mediators": [
+    "aggregation",
+    "biological activity",
+    "higher-order structure"
+   ],
+   "n_med": 15
+  },
+  {
+   "cause": "agitation stress",
+   "cause_cat": "stress",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.258,
+   "mediators": [
+    "aggregation",
+    "immunogenicity",
+    "biological activity"
+   ],
+   "n_med": 12
+  },
+  {
+   "cause": "polysorbate 80",
+   "cause_cat": "formulation",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.254,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 15
+  },
+  {
+   "cause": "surfactant",
+   "cause_cat": "formulation",
+   "effect": "conformational stability",
+   "subcat": "biological",
+   "score": 0.253,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "higher-order structure"
+   ],
+   "n_med": 25
+  },
+  {
+   "cause": "storage temperature",
+   "cause_cat": "stress",
+   "effect": "deamidation",
+   "subcat": "chemical",
+   "score": 0.251,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 17
+  },
+  {
+   "cause": "freeze-thaw cycles",
+   "cause_cat": "stress",
+   "effect": "deamidation",
+   "subcat": "chemical",
+   "score": 0.247,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "biological activity"
+   ],
+   "n_med": 11
+  },
+  {
+   "cause": "electrostatic repulsion",
+   "cause_cat": "structure",
+   "effect": "thermal stability",
+   "subcat": "biological",
+   "score": 0.245,
+   "mediators": [
+    "aggregation",
+    "binding activity",
+    "binding affinity"
+   ],
+   "n_med": 8
+  },
+  {
+   "cause": "electrostatic repulsion",
+   "cause_cat": "structure",
+   "effect": "particle formation",
+   "subcat": "physical",
+   "score": 0.244,
+   "mediators": [
+    "aggregation",
+    "binding affinity",
+    "self-association"
+   ],
+   "n_med": 9
+  }
+ ]
+}

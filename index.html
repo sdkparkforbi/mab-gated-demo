@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>mAb-GATED 예측·가설 데모</title>
+<meta name="description" content="실제 지식그래프로 mAb-GATED의 안정성 노드 예측을 확인하고 새 가설 생성을 시뮬레이션합니다." />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="GenAIBiC · mAb" />
+<meta property="og:title" content="mAb-GATED 예측·가설 데모" />
+<meta property="og:description" content="실제 지식그래프로 안정성 노드 예측을 직접 확인하고, 새 가설 생성을 시뮬레이션합니다." />
+<meta property="og:image" content="https://mab-gated-demo.vercel.app/og.png" />
+<meta property="og:url" content="https://mab-gated-demo.vercel.app/" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="mAb-GATED 예측·가설 데모" />
+<meta name="twitter:description" content="실제 지식그래프로 안정성 노드 예측을 직접 확인하고, 새 가설 생성을 시뮬레이션합니다." />
+<meta name="twitter:image" content="https://mab-gated-demo.vercel.app/og.png" />
+<style>
+:root{
+  --ink:#20303a;--soft:#51626d;--paper:#fbf7ef;--card:#fffdf8;--line:#e8e0d2;
+  --brand:#2f7d8c;--brand-d:#1f5b67;--accent:#e9913f;--accent-d:#c9742a;
+  --pos:#2e9e6b;--neg:#d65a4e;--neu:#9aa7b0;
+  --seq:#7c6cd1;--str:#4f8fcf;--form:#2f9e8f;--stress:#e07b39;--stab:#d65a8a;--qual:#b58a2e;
+  --sans:"Pretendard",-apple-system,"Segoe UI","Apple SD Gothic Neo",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.65;
+  background:radial-gradient(1100px 560px at 85% -10%,#fff6e6 0,transparent 60%),
+             radial-gradient(800px 460px at -10% 110%,#e6f3f2 0,transparent 55%),var(--paper)}
+.wrap{max-width:860px;margin:0 auto;padding:26px 20px 90px}
+h1{font-size:25px;margin:0 0 4px;letter-spacing:-.01em}
+.lead{color:var(--soft);font-size:15px;margin:0 0 6px}
+.note{font-size:13px;color:var(--soft);background:#eef2f7;border:1px solid #d4dfeb;border-radius:10px;padding:10px 13px;margin:14px 0}
+.note b{color:var(--brand-d)}
+/* metrics */
+.metrics{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.m{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;box-shadow:0 8px 22px rgba(40,50,60,.06)}
+.m .k{font-size:11px;color:var(--soft);letter-spacing:.03em}
+.m .v{font-size:26px;font-weight:800;color:var(--brand-d);line-height:1.15}
+.m.hl .v{color:var(--accent-d)}
+/* tabs */
+.tabs{display:flex;gap:8px;margin:20px 0 14px}
+.tab{flex:1;text-align:center;cursor:pointer;font-weight:700;font-size:15px;padding:12px;border-radius:12px;
+  border:2px solid var(--line);background:#fff;color:var(--soft)}
+.tab.on{border-color:var(--brand);background:#eaf3f4;color:var(--brand-d)}
+.panel{display:none}.panel.on{display:block}
+/* shared */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(40,50,60,.07);padding:20px 22px;margin:14px 0}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;color:#fff;margin:2px}
+.chip.seq{background:var(--seq)}.chip.structure{background:var(--str)}.chip.formulation{background:var(--form)}
+.chip.stress{background:var(--stress)}.chip.stability{background:var(--stab)}.chip.quality_outcome{background:var(--qual)}
+.chip.physical,.chip.chemical,.chip.biological{background:var(--stab)}
+.btn{font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;border:none;border-radius:10px;padding:10px 16px;background:var(--brand);color:#fff}
+.btn.alt{background:var(--accent)}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.5;cursor:default}
+.pick{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.pick button{font-family:var(--sans);font-size:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:6px 12px}
+.pick button.sel{border-color:var(--brand);background:#eaf3f4;color:var(--brand-d);font-weight:700}
+.sub-h{font-size:12px;color:var(--soft);font-weight:700;margin:8px 0 2px;letter-spacing:.05em}
+.masked{font-size:30px;font-weight:800;color:var(--stab);text-align:center;margin:6px 0}
+.cands .row{display:flex;align-items:center;gap:10px;margin:7px 0}
+.cands .nm{width:165px;font-size:13.5px;font-weight:600;flex-shrink:0}
+.cands .bar{flex:1;height:20px;background:#eee;border-radius:6px;overflow:hidden}
+.cands .bar i{display:block;height:100%;background:var(--neu)}
+.cands .row.correct .nm{color:var(--pos)}
+.cands .row.correct .bar i{background:var(--pos)}
+.cands .row.top .bar i{background:var(--brand)}
+.cands .sc{width:42px;text-align:right;font-size:12px;color:var(--soft)}
+.verdict{margin-top:12px;padding:12px 14px;border-radius:10px;font-weight:700}
+.verdict.ok{background:#eaf6f1;border:1px solid #c7e7d8;color:var(--pos)}
+.verdict.no{background:#fdeeec;border:1px solid #f4cdc6;color:var(--neg)}
+.tally{font-size:14px;background:#fff3e2;border:1px solid #f3d9b3;border-radius:10px;padding:11px 14px;margin:12px 0}
+.tally b{color:var(--accent-d)}
+/* hypotheses */
+.hyp{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px 16px;margin:10px 0;opacity:0;transform:translateY(8px);transition:.4s}
+.hyp.show{opacity:1;transform:none}
+.hyp .h{font-size:16px;font-weight:700}
+.hyp .arrow{color:var(--neu);margin:0 5px}
+.hyp .path{font-size:13px;color:var(--soft);margin-top:6px}
+.hyp .new{font-size:11px;font-weight:700;color:var(--accent-d);background:#fff2e0;border:1px solid #f4ddbf;border-radius:999px;padding:2px 8px;margin-left:6px}
+.hyp .scorebar{height:6px;background:#eee;border-radius:4px;margin-top:8px;overflow:hidden}
+.hyp .scorebar i{display:block;height:100%;background:var(--accent)}
+.filters{display:flex;gap:7px;margin:8px 0}
+.filters button{font-family:var(--sans);font-size:13px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px}
+.filters button.on{border-color:var(--brand);background:#eaf3f4;color:var(--brand-d);font-weight:700}
+.foot{text-align:center;color:var(--soft);font-size:12px;margin-top:30px}
+a{color:var(--brand-d)}
+.scan{font-size:14px;color:var(--brand-d);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🧪 mAb-GATED 예측·가설 데모</h1>
+    <p class="lead">정말로 안정성 노드를 잘 맞히는지 직접 눌러 보고, 새 가설 생성도 시뮬레이션합니다.</p>
+  </header>
+
+  <div class="metrics" id="metrics"></div>
+
+  <div class="note">
+    ⓘ 이 데모는 <b>실제 지식그래프(8,670 노드·32,939 엣지)</b>로 mAb-GATED의 추론 방식(이웃 맥락 → 안정성 노드 순위)을
+    재현합니다. 인터랙티브 점수는 그래프 <b>공기반(co-occurrence) 휴리스틱</b>이며,
+    완전한 <b>GAT 신경망</b>은 더 정교해 <b>Hits@1 84.7%</b>를 달성합니다(상단 수치 = 실제 모델 성능).
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" data-t="pred">🎯 안정성 예측 검증</div>
+    <div class="tab" data-t="hyp">🔮 가설 생성</div>
+  </div>
+
+  <!-- 예측 패널 -->
+  <div class="panel on" id="p-pred">
+    <p style="font-size:14px;color:var(--soft)">안정성 노드 하나를 <b>가리고</b>, 주어진 이웃 맥락만으로 같은 하위범주 후보 중에서 맞히게 합니다. 타깃을 고르세요.</p>
+    <div class="pick" id="targetPick"></div>
+    <div class="card" id="predCard" style="display:none"></div>
+    <div class="tally" id="tally"></div>
+  </div>
+
+  <!-- 가설 패널 -->
+  <div class="panel" id="p-hyp">
+    <p style="font-size:14px;color:var(--soft)">모델 구조상 <b>강하게 연결될 법하지만 아직 문헌에 직접 보고되지 않은</b> 인과 후보를 찾습니다 (link prediction).</p>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn alt" id="genBtn">🔮 가설 생성 시뮬레이션</button>
+      <span class="scan" id="scan"></span>
+    </div>
+    <div class="filters" id="hypFilters" style="display:none">
+      <button class="on" data-f="all">전체</button>
+      <button data-f="physical">물리</button>
+      <button data-f="chemical">화학</button>
+      <button data-f="biological">생물</button>
+    </div>
+    <div id="hypList"></div>
+    <div class="note" id="hypNote" style="display:none">
+      ⚠️ <b>예측 ≠ 사실.</b> 위 후보는 그래프 구조로부터 도출된 <b>검증 대상 가설</b>입니다 — 실험으로 반증 가능해야 가치가 있습니다.
+    </div>
+  </div>
+
+  <p class="foot">
+    mab-gated-demo ·
+    <a href="https://mab-causal-network.vercel.app">네트워크</a> ·
+    <a href="https://mab-causal-guidebook.vercel.app">그림책</a>
+  </p>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const SUBLABEL={physical:'물리',chemical:'화학',biological:'생물'};
+let DATA=null, used=new Set();
+
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function metrics(m){
+  $("#metrics").innerHTML=`
+    <div class="m hl"><div class="k">실제 GAT · Test Hits@1</div><div class="v">${m.overall_h1}%</div></div>
+    <div class="m"><div class="k">Test MRR</div><div class="v">${m.overall_mrr}</div></div>
+    <div class="m"><div class="k">물리 H@1</div><div class="v">${m.physical_h1}%</div></div>
+    <div class="m"><div class="k">화학 H@1</div><div class="v">${m.chemical_h1}%</div></div>
+    <div class="m"><div class="k">생물 H@1</div><div class="v">${m.biological_h1}%</div></div>`;
+}
+
+function targetButtons(){
+  const order={physical:1,chemical:2,biological:3};
+  const ts=[...DATA.targets].sort((a,b)=>order[a.subcat]-order[b.subcat]);
+  $("#targetPick").innerHTML = ts.map((t,i)=>
+    `<button data-i="${i}"><span class="chip ${t.subcat}">${SUBLABEL[t.subcat]}</span> ${esc(t.target)}</button>`).join("")
+    + `<button data-i="rand" style="font-weight:700">🎲 무작위</button>`;
+  $("#targetPick").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    let i=b.dataset.i; if(i==="rand") i=Math.floor(Math.random()*ts.length);
+    $("#targetPick").querySelectorAll("button").forEach(x=>x.classList.remove("sel"));
+    b.classList.add("sel"); showTarget(ts[i]);
+  });
+}
+
+function showTarget(t){
+  const card=$("#predCard"); card.style.display="block";
+  card.innerHTML=`
+    <div class="sub-h">가려진 안정성 노드 (하위범주: ${SUBLABEL[t.subcat]} · 후보 ${t.candidates.length}개)</div>
+    <div class="masked">❓</div>
+    <div class="sub-h">주어진 맥락 — 이웃 원인(상류)</div>
+    <div>${t.context.map(c=>`<span class="chip ${c.cat}">${esc(c.node)}</span>`).join(" ")}</div>
+    <div style="margin-top:14px"><button class="btn" id="runPred">예측 실행 ▶</button></div>
+    <div id="predResult"></div>`;
+  $("#runPred").onclick=()=>revealPred(t);
+}
+
+function revealPred(t){
+  const mx=Math.max(...t.candidates.map(c=>c.score),0.001);
+  const top=t.candidates[0];
+  const rows=t.candidates.map((c,idx)=>{
+    const cls=(c.correct?"correct ":"")+(idx===0?"top":"");
+    return `<div class="row ${cls}">
+      <div class="nm">${idx+1}. ${esc(c.node)}${c.correct?' ✓':''}</div>
+      <div class="bar"><i style="width:${Math.round(c.score/mx*100)}%"></i></div>
+      <div class="sc">${c.score.toFixed(2)}</div></div>`;
+  }).join("");
+  const ok=t.rank===1;
+  const v=ok
+    ? `<div class="verdict ok">✓ 정답! 모델이 <b>${esc(t.target)}</b>을(를) 1순위로 정확히 복원했습니다.</div>`
+    : `<div class="verdict no">모델 1순위: <b>${esc(top.node)}</b> · 실제 정답 <b>${esc(t.target)}</b>은 ${t.rank}순위 (어려운 사례)</div>`;
+  $("#predResult").innerHTML=`<div class="sub-h" style="margin-top:14px">예측 순위 (점수=맥락 일치도)</div><div class="cands">${rows}</div>${v}`;
+  used.add(t.target); updateTally();
+}
+
+function updateTally(){
+  const d=DATA.demo_accuracy;
+  $("#tally").innerHTML=`이 데모(휴리스틱)는 <b>${d.total}개 중 ${d.correct}개</b>를 1순위로 맞힙니다. `
+    +`실제 <b>mAb-GATED(GAT)</b>는 같은 과제에서 <b>Hits@1 ${DATA.real_metrics.overall_h1}%</b> — 단순 공기반보다 훨씬 정교합니다.`;
+}
+
+// 가설 생성 시뮬레이션
+let HYP_FILTER="all";
+function renderHyp(){
+  const list=DATA.hypotheses.filter(h=>HYP_FILTER==="all"||h.subcat===HYP_FILTER);
+  $("#hypList").innerHTML=list.map((h,i)=>`
+    <div class="hyp" data-k="${i}">
+      <div class="h"><span class="chip ${h.subcat}">${SUBLABEL[h.subcat]}</span>
+        ${esc(h.cause)} <span class="arrow">→</span> ${esc(h.effect)}
+        <span class="new">🆕 신규 후보 · 직접 엣지 없음</span></div>
+      <div class="path">근거 경로: <b>${esc(h.cause)}</b> → {${h.mediators.map(esc).join(', ')}} → <b>${esc(h.effect)}</b> · 매개 ${h.n_med}개</div>
+      <div class="scorebar"><i style="width:${Math.round(h.score*100)}%"></i></div>
+    </div>`).join("");
+  // 순차 등장
+  const cards=[...$("#hypList").querySelectorAll(".hyp")];
+  cards.forEach((c,i)=>setTimeout(()=>c.classList.add("show"), 120*i));
+}
+
+$("#genBtn").onclick=()=>{
+  const btn=$("#genBtn"); btn.disabled=true;
+  const steps=["그래프 스캔 중…","구조 유사도 계산…","미관측 쌍 점수화…","2-hop 매개 경로 확인…","후보 정렬…"];
+  let i=0; $("#scan").textContent=steps[0];
+  const iv=setInterval(()=>{ i++; if(i<steps.length){$("#scan").textContent=steps[i];}
+    else{ clearInterval(iv); $("#scan").textContent=`✓ ${DATA.hypotheses.length}개 가설 후보 생성`;
+      $("#hypFilters").style.display="flex"; $("#hypNote").style.display="block"; renderHyp(); btn.disabled=false; btn.textContent="🔁 다시 생성"; }
+  }, 450);
+};
+document.querySelectorAll("#hypFilters button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#hypFilters button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); HYP_FILTER=b.dataset.f; renderHyp();
+});
+
+// 탭
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on")); t.classList.add("on");
+  $("#p-pred").classList.toggle("on", t.dataset.t==="pred");
+  $("#p-hyp").classList.toggle("on", t.dataset.t==="hyp");
+});
+
+fetch("demo.json").then(r=>r.json()).then(d=>{
+  DATA=d; metrics(d.real_metrics); targetButtons(); updateTally();
+}).catch(e=>{ $("#metrics").innerHTML='<div class="note">demo.json을 불러오지 못했습니다. 배포된 URL에서 열어 주세요.</div>'; });
+</script>
+</body>
+</html>
